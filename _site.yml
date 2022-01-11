@@ -1,0 +1,16 @@
+name: CS631 Labs
+output_dir: '.'
+navbar:
+  title: Iniciativas Populares de Norma
+  left:
+  right:
+  - text: About
+    href: about.html
+output:
+  html_document:
+    theme: flatly
+    includes:
+      after_body: 
+    lib_dir: site_libs
+    self_contained: no
+

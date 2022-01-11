@@ -1,0 +1,99 @@
+---
+title: "Análisis"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(readxl)
+library(httr)
+library(tidyverse)
+library(plotly)
+library(googleVis)
+library(R2HTML)
+library(stringi)
+library(pander)
+
+url<-'https://plataforma.chileconvencion.cl/m/iniciativa_popular/iniciativas.xls'
+GET(url, write_disk(TF <- tempfile(fileext = ".xls")))
+
+iniciativas <- read_excel(TF) %>% as_tibble()
+
+```
+
+
+Dentro de las iniciativas de participación ciudadana por parte de la convención constituyente, esta la **Plataforma digital de participación popular**, la que puede ser encontrada en el siguiente enlace: <https://plataforma.chileconvencion.cl>. En dicha plataforma, existe la posibilidad de convocar a **Cabildos** como también la generación de **Iniciativa Popular de Norma**. Este informe intenta mostrar algunas cifras relacionadas con las iniciativas populares en dicha plataforma. 
+
+## Una mirada a las propuestas {.tabset .tabset-fade .tabset-pills}
+
+### Análisis por iniciativa
+
+En el contexto de cada iniciativa, el gráfico presenta las iniciativas que cuenta más de 3000 apoyos en la plataforma. Cada iniciativa está indicada por su número identificador, por un tema de espacio pero más abajo se especifica la tabla que contiene el detalle y el enlace a cada iniciativa. 
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+# Iniciativas más populares
+
+
+populares_01 <- iniciativas %>% 
+  select(Nº, `Título`, `Cantidad de Apoyos`, URL) %>%
+  rename(NUMERO = Nº,
+         TITULO = `Título`,
+         APOYOS = `Cantidad de Apoyos`) %>% 
+  mutate(TITULO = stri_trans_general(toupper(TITULO), "Latin-ASCII")) %>% 
+  arrange(desc(APOYOS)) %>% 
+  filter(APOYOS > 3000) %>% 
+  slice_head(n = 30) 
+
+populares_01$NUMERO <- factor(populares_01$NUMERO, 
+                                levels = populares_01$NUMERO[order(populares_01$APOYOS)]) 
+
+m <- list(l=10, r=0, b=50, t=50, pad=4)
+
+fig <- plot_ly(populares_01, x = ~NUMERO, y = ~APOYOS, type = 'bar', text = ~TITULO,
+               marker = list(color = 'rgb(158,202,225)',
+                             line = list(color = 'rgb(8,48,107)',
+                                         width = 1.5))) %>% 
+  layout(title = 'Iniciativas con mayor apoyo', font=list(size = 20)) %>%
+  layout(xaxis = list(title = 'Número de la iniciativa'), yaxis = list(title = 'Número de apoyos')) %>%
+  layout(xaxis = list(titlefont = list(size = 10), tickfont = list(size = 10)), 
+         yaxis = list(titlefont = list(size = 10), tickfont = list(size = 10))) %>% 
+  layout(margin=m)
+
+fig
+```
+
+
+### Análisis de iniciativas por tema
+
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+
+# Iniciativas por tema
+
+tema_01 <- iniciativas %>% 
+  group_by(Tema) %>% 
+  count() %>% 
+  filter(n > 10) %>% 
+  arrange(desc(n)) 
+
+tema_01$Tema <- factor(tema_01$Tema, levels = tema_01$Tema[order(tema_01$n)])
+m <- list(l=500, r=0, b=50, t=50, pad=4)
+
+
+fig <- plot_ly(tema_01, x = ~n, y = ~Tema, type = 'bar', text = ~Tema,
+               marker = list(color = 'rgb(158,202,225)',
+                             line = list(color = 'rgb(8,48,107)',
+                                         width = 1.5)),
+               orientation = 'h') %>%
+  layout(autosize = T, margin=list( l = 50, r = 50, b = 100, t = 100,  pad = 4)) %>%
+  layout(title = 'Iniciativas por tema', font=list(size = 20)) %>%
+  layout(xaxis = list(title = 'Número de iniciativas'), yaxis = list(title = '')) %>%
+  layout(xaxis = list(titlefont = list(size = 10), tickfont = list(size = 10)), 
+         yaxis = list(titlefont = list(size = 10), tickfont = list(size = 10))) %>%
+  layout(margin=m)
+
+fig
+
+
+```
+
