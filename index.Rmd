@@ -1,5 +1,13 @@
 ---
 title: "Análisis"
+output:
+  html_document:
+    theme: flatly
+    includes:
+      after_body: footer.html
+    lib_dir: site_libs
+    self_contained: no
+    css: "style_2.css"
 ---
 
 ```{r setup, include=FALSE}
@@ -21,8 +29,9 @@ iniciativas <- read_excel(TF) %>% as_tibble()
 
 ```
 
-
+<p align="justify">
 Dentro de las iniciativas de participación ciudadana por parte de la convención constituyente, esta la **Plataforma digital de participación popular**, la que puede ser encontrada en el siguiente enlace: <https://plataforma.chileconvencion.cl>. En dicha plataforma, existe la posibilidad de convocar a **Cabildos** como también la generación de **Iniciativa Popular de Norma**. Este informe intenta mostrar algunas cifras relacionadas con las iniciativas populares en dicha plataforma. 
+</p>
 
 ## Una mirada a las propuestas {.tabset .tabset-fade .tabset-pills}
 
@@ -96,4 +105,10 @@ fig
 
 
 ```
+
+<script>
+   $(document).ready(function() {
+     $head = $('#header');
+     $head.prepend('<img src=\"logo.png\" style=\"float: right;width: 200px;\"/>')});
+</script>
 

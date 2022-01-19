@@ -10,7 +10,9 @@ output:
   html_document:
     theme: flatly
     includes:
-      after_body: 
+      after_body: footer.html
     lib_dir: site_libs
     self_contained: no
+    css: style_2.css
+    
 
