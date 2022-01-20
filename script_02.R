@@ -1,10 +1,3 @@
----
-title: "Análisis de Iniciativas Populares de Norma"
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-
 library(readxl)
 library(httr)
 library(tidyverse)
@@ -18,21 +11,6 @@ url<-'https://plataforma.chileconvencion.cl/m/iniciativa_popular/iniciativas.xls
 GET(url, write_disk(TF <- tempfile(fileext = ".xls")))
 
 iniciativas <- read_excel(TF) %>% as_tibble()
-
-```
-
-<p align="justify">
-Dentro de las iniciativas de participación ciudadana por parte de la convención constituyente, esta la **Plataforma digital de participación popular**, la que puede ser encontrada en el siguiente enlace: <https://plataforma.chileconvencion.cl>. En dicha plataforma, existe la posibilidad de convocar a **Cabildos** como también la generación de **Iniciativa Popular de Norma**. Este informe intenta mostrar algunas cifras relacionadas con las iniciativas populares en dicha plataforma. 
-</p>
-
-## Una mirada a las propuestas {.tabset .tabset-fade .tabset-pills}
-
-### Análisis por iniciativa
-
-En el contexto de cada iniciativa, el gráfico presenta las iniciativas que cuenta más de 3000 apoyos en la plataforma. Cada iniciativa está indicada por su número identificador, por un tema de espacio pero más abajo se especifica la tabla que contiene el detalle y el enlace a cada iniciativa. 
-
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
-# Iniciativas más populares
 
 # Iniciativas populares
 
@@ -62,11 +40,7 @@ fig <- plot_ly(populares_01, x = ~APOYOS, y = ~TITULO, type = 'bar', text = ~TIT
   layout(margin=m)
 
 fig
-```
 
-### Análisis de iniciativas por comisión
-
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
 # Iniciativas por comisión
 
 comision_01 <- iniciativas %>% 
@@ -90,14 +64,6 @@ fig <- plot_ly(comision_01, x = ~`Iniciativas por comisión`, y = ~Comisión, ty
   layout(margin=m)
 
 fig
-
-
-```
-
-### Análisis de iniciativas por tema
-
-
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
 
 # Iniciativas por tema
 
@@ -127,12 +93,6 @@ fig <- plot_ly(tema_02, x = ~n, y = ~Tema, type = 'bar', text = ~Tema,
   layout(margin=m)
 
 fig
-```
-
-### Iniciativas por persona
-
-
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
 
 # Por persona
 
@@ -164,17 +124,14 @@ fig <- plot_ly(personas_01, x = ~`Número de personas`, y = ~`Número de iniciat
   layout(margin=m)
 
 fig
-```
 
-
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
-
-# Personas con más de una iniciativa
 
 personas_02 <- iniciativas %>% 
   group_by(Autor) %>% 
   summarise("Número de iniciativas" = n()) %>% 
   filter(`Número de iniciativas` > 3)
+
+# Personas con más de una iniciativa
 
 personas_02$Autor <- factor(personas_02$Autor, 
                             levels = personas_02$Autor[order(personas_02$`Número de iniciativas`)]) 
@@ -193,11 +150,3 @@ fig <- plot_ly(personas_02, x = ~`Número de iniciativas`, y = ~Autor, type = 'b
   layout(margin=m)
 
 fig
-```
-
-<script>
-   $(document).ready(function() {
-     $head = $('#header');
-     $head.prepend('<img src=\"logo.png\" style=\"float: right;width: 150px;\"/>')});
-</script>
-

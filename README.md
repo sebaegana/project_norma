@@ -1,1 +1,1 @@
-Acá falta algo
+Proyecto de visualización relacionado con las Iniciativas Populares de Norma por parte de la Convención Constituyente. 
