@@ -3,6 +3,7 @@ title: "About"
 ---
 
 ```{r setup, include=FALSE}
+library(icons)
 htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 ```
 
@@ -10,12 +11,20 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 
 This is an [R Markdown website](http://rmarkdown.rstudio.com/rmarkdown_websites.html). 
 
-Who am I?
+Who we are?
 
-  * Sebastián Egaña
+**Sebastián Egaña Santibáñez**
+
   * <a href = "https://github.com/sebaegana"><i class="fa fa-github"> GitHub</i></a>
   * <a href = "https://segana.netlify.app"><i class="fa fa-home"> Personal Website</i></a>
+  * <a href = "https://www.linkedin.com/in/sebastian-egana-santibanez/"><i class="fa fa-linkedin"> LinkedIn </i></a>
+  * <a href = "mailto:sebastianeganasa@santotomas.cl"><i class="fa fa-paper-plane"> Mail</i></a>
+  
+**Victor Macías Essedin**
 
+  * <a href = "https://www.linkedin.com/in/victor-macias-45b78b3b"><i class="fa fa-linkedin"> LinkedIn</i></a>
+  * <a href = "mailto:vmacias@santotomas.cl"><i class="fa fa-paper-plane"> Mail</i></a>
+  
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -31,4 +40,10 @@ Who am I?
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+
+<script>
+   $(document).ready(function() {
+     $head = $('#header');
+     $head.prepend('<img src=\"logo.png\" style=\"float: right;width: 150px;\"/>')});
+</script>
 

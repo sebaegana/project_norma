@@ -26,7 +26,19 @@ populares_01 <- iniciativas %>%
 populares_01$TITULO <- factor(populares_01$TITULO, 
                               levels = populares_01$TITULO[order(populares_01$APOYOS)]) 
 
-m <- list(l=500, r=0, b=10, t=30, pad=4)
+vline <- function(x = 0, color = 'rgb(40,70,58)') {
+  list(
+    type = "line",
+    y0 = 0,
+    y1 = 1,
+    yref = "paper",
+    x0 = x,
+    x1 = x,
+    line = list(color = color, dash="dot")
+  )
+}
+
+m <- list(l=500, r=0, b=10, t=35, pad=4)
 
 fig <- plot_ly(populares_01, x = ~APOYOS, y = ~TITULO, type = 'bar', text = ~TITULO,
                marker = list(color = 'rgb(183,191,16)',
@@ -37,9 +49,15 @@ fig <- plot_ly(populares_01, x = ~APOYOS, y = ~TITULO, type = 'bar', text = ~TIT
   layout(xaxis = list(title = 'Número de apoyos'), yaxis = list(title = '')) %>%
   layout(xaxis = list(titlefont = list(size = 10), tickfont = list(size = 10)), 
          yaxis = list(titlefont = list(size = 10), tickfont = list(size = 10))) %>% 
-  layout(margin=m)
+  layout(margin=m) %>% 
+  layout(shapes = list(vline(15000)))
 
 fig
+
+populares_02 <- populares_01 %>% 
+  filter(APOYOS > 15000)
+
+nrow(populares_02)
 
 # Iniciativas por comisión
 
@@ -104,6 +122,8 @@ personas <- iniciativas %>%
 personas_01 <- personas %>% 
   group_by(`Número de iniciativas`) %>% 
   summarise("Número de personas" = n()) 
+
+sum(personas_01$`Número de personas`)
 
 # Personas con más de una iniciativa
 

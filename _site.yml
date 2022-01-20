@@ -1,7 +1,7 @@
 name: CS631 Labs
 output_dir: '.'
 navbar:
-  title: Observatorio de datos públicos de la Facultad de Economía y Negocios de la UST
+  title: Observatorio de datos públicos FEN UST
   left:
   right:
   - text: About

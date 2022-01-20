@@ -22,18 +22,22 @@ iniciativas <- read_excel(TF) %>% as_tibble()
 ```
 
 <p align="justify">
-Dentro de las iniciativas de participación ciudadana por parte de la convención constituyente, esta la **Plataforma digital de participación popular**, la que puede ser encontrada en el siguiente enlace: <https://plataforma.chileconvencion.cl>. En dicha plataforma, existe la posibilidad de convocar a **Cabildos** como también la generación de **Iniciativa Popular de Norma**. Este informe intenta mostrar algunas cifras relacionadas con las iniciativas populares en dicha plataforma. 
+La información presente en esta plataforma proviene directamente desde la **Plataforma digital de participación popular**, en el siguiente enlace: <https://plataforma.chileconvencion.cl>. Especificamente, se muestra a continuación lo relacionado con **Iniciativas Populare de Norma**, observando el apoyo, comisiones, temas y personas relacionadas con cada iniciativa. 
 </p>
 
-## Una mirada a las propuestas {.tabset .tabset-fade .tabset-pills}
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+**Creación: 2021-01-20**
+
+**Actualización: `r Sys.Date()`**
+
+
+## Una mirada a las iniciativas {.tabset .tabset-fade .tabset-pills}
 
 ### Análisis por iniciativa
 
-En el contexto de cada iniciativa, el gráfico presenta las iniciativas que cuenta más de 3000 apoyos en la plataforma. Cada iniciativa está indicada por su número identificador, por un tema de espacio pero más abajo se especifica la tabla que contiene el detalle y el enlace a cada iniciativa. 
-
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
-# Iniciativas más populares
-
 # Iniciativas populares
 
 populares_01 <- iniciativas %>% 
@@ -48,7 +52,19 @@ populares_01 <- iniciativas %>%
 populares_01$TITULO <- factor(populares_01$TITULO, 
                               levels = populares_01$TITULO[order(populares_01$APOYOS)]) 
 
-m <- list(l=500, r=0, b=10, t=30, pad=4)
+vline <- function(x = 0, color = 'rgb(40,70,58)') {
+  list(
+    type = "line",
+    y0 = 0,
+    y1 = 1,
+    yref = "paper",
+    x0 = x,
+    x1 = x,
+    line = list(color = color, dash="dot")
+  )
+}
+
+m <- list(l=500, r=0, b=10, t=35, pad=4)
 
 fig <- plot_ly(populares_01, x = ~APOYOS, y = ~TITULO, type = 'bar', text = ~TITULO,
                marker = list(color = 'rgb(183,191,16)',
@@ -59,10 +75,29 @@ fig <- plot_ly(populares_01, x = ~APOYOS, y = ~TITULO, type = 'bar', text = ~TIT
   layout(xaxis = list(title = 'Número de apoyos'), yaxis = list(title = '')) %>%
   layout(xaxis = list(titlefont = list(size = 10), tickfont = list(size = 10)), 
          yaxis = list(titlefont = list(size = 10), tickfont = list(size = 10))) %>% 
-  layout(margin=m)
+  layout(margin=m) %>% 
+  layout(shapes = list(vline(15000)))
 
 fig
+
+populares_02 <- populares_01 %>% 
+  filter(APOYOS > 15000)
+
+
+
 ```
+
+<p align="justify">
+Se debe recordar el compromiso por parte de la convención de discutir las iniciativas populares que superen los 15k de apoyo. 
+
+La línea punteada muestra dicho valor para poder tener una impresión de las iniciativas que superan el número. 
+
+Actualmente `r nrow(populares_02)` iniciativas superan los 15k.
+</p>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
 
 ### Análisis de iniciativas por comisión
 
@@ -94,6 +129,13 @@ fig
 
 ```
 
+<p align="justify">
+En el caso de las comisiones, existe un predominancia por parte de las iniciativas relacionadas con **Derechos Fundamentales**, lo que se relaciona con las distintas visiones en la actualidad sobre cuáles deberían ser lo lineamientos básicos de la sociedad futura que se busca construir. 
+</p>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
 ### Análisis de iniciativas por tema
 
 
@@ -111,7 +153,7 @@ tema_02 <- tema_01 %>%
   filter(n > 20)
 
 tema_02$Tema <- factor(tema_02$Tema, levels = tema_02$Tema[order(tema_02$n)])
-m <- list(l=500, r=0, b=10, t=30, pad=4)
+m <- list(l=500, r=0, b=10, t=35, pad=4)
 
 
 fig <- plot_ly(tema_02, x = ~n, y = ~Tema, type = 'bar', text = ~Tema,
@@ -128,6 +170,13 @@ fig <- plot_ly(tema_02, x = ~n, y = ~Tema, type = 'bar', text = ~Tema,
 
 fig
 ```
+
+<p align="justify">
+Dentro de los temas de las iniciativas, se observa algo parecido a lo relacionado con las comisiones, ocupando un lugar relevante **Sistema electoral y organizaciones políticas** e **Instituciones, organización del Estado y régimen político**, temas muy relacionados con las distintas visiones de la sociedad. Por otra parte, el primer lugar es ocupado por **Educación**, en donde existen múltiples iniciativas que plantean visiones futuras de la educación en Chile.
+</p>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 ### Iniciativas por persona
 
@@ -150,7 +199,7 @@ personas_01 <- personas %>%
 personas_01$`Número de iniciativas` <- factor(personas_01$`Número de iniciativas`, 
                                               levels = personas_01$`Número de iniciativas`[order(personas_01$`Número de personas`)]) 
 
-m <- list(l=50, r=0, b=10, t=30, pad=4)
+m <- list(l=50, r=0, b=10, t=35, pad=4)
 
 fig <- plot_ly(personas_01, x = ~`Número de personas`, y = ~`Número de iniciativas`, type = 'bar',
                marker = list(color = 'rgb(183,191,16)',
@@ -166,6 +215,14 @@ fig <- plot_ly(personas_01, x = ~`Número de personas`, y = ~`Número de iniciat
 fig
 ```
 
+<p align="justify">
+Este gráfico nos da una impresión de la participación dentro de la plataforma; en la actualidad hay `r nrow(iniciativas)`, en donde `r sum(personas_01$"Número de personas")` personas han presentado más de una iniciativa. 
+
+Como dato, la página de la plataforma siempre muestra una más, pero esto es debdio a que cuenta filas pero considerando los encabezados. 
+</p>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 
@@ -194,6 +251,13 @@ fig <- plot_ly(personas_02, x = ~`Número de iniciativas`, y = ~Autor, type = 'b
 
 fig
 ```
+
+<p align="justify">
+En términos de  nombres, se muestra quienes destacan con más de tres iniciativas en la plataforma.
+</p>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 <script>
    $(document).ready(function() {
