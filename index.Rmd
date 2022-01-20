@@ -74,7 +74,7 @@ fig <- plot_ly(populares_01, x = ~APOYOS, y = ~TITULO, type = 'bar', text = ~TIT
   layout(title = 'Iniciativas con más de 8000 apoyos', font=list(size = 15)) %>%
   layout(xaxis = list(title = 'Número de apoyos'), yaxis = list(title = '')) %>%
   layout(xaxis = list(titlefont = list(size = 10), tickfont = list(size = 10)), 
-         yaxis = list(titlefont = list(size = 6), tickfont = list(size = 6))) %>% 
+         yaxis = list(titlefont = list(size = 8), tickfont = list(size = 8))) %>% 
   layout(margin=m) %>% 
   layout(shapes = list(vline(15000)))
 
