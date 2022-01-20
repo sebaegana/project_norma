@@ -236,7 +236,7 @@ personas_02 <- iniciativas %>%
 personas_02$Autor <- factor(personas_02$Autor, 
                             levels = personas_02$Autor[order(personas_02$`Número de iniciativas`)]) 
 
-m <- list(l=170, r=0, b=10, t=30, pad=4)
+m <- list(l=170, r=0, b=10, t=35, pad=4)
 
 fig <- plot_ly(personas_02, x = ~`Número de iniciativas`, y = ~Autor, type = 'bar',
                marker = list(color = 'rgb(183,191,16)',
