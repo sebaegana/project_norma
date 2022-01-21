@@ -23,6 +23,8 @@ iniciativas <- read_excel(TF) %>% as_tibble()
 
 <p align="justify">
 La información presente en esta plataforma proviene directamente desde la **Plataforma digital de participación popular**, en el siguiente enlace: <https://plataforma.chileconvencion.cl>. Especificamente, se muestra a continuación lo relacionado con **Iniciativas Populare de Norma**, observando el apoyo, comisiones, temas y personas relacionadas con cada iniciativa. 
+
+Habiendo terminado la fecha de presentación de iniciativas, se espera contribuir en el apoyo de las mismas a través de la información presente acá. Considerar que el apoyo es hasta el 1 de febrero. 
 </p>
 
 <p>&nbsp;</p>
@@ -217,8 +219,6 @@ fig
 
 <p align="justify">
 Este gráfico nos da una impresión de la participación dentro de la plataforma; en la actualidad hay `r nrow(iniciativas)`, en donde `r sum(personas_01$"Número de personas")` personas han presentado más de una iniciativa. 
-
-Como dato, la página de la plataforma siempre muestra una más, pero esto es debdio a que cuenta filas pero considerando los encabezados. 
 </p>
 
 <p>&nbsp;</p>
