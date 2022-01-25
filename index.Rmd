@@ -22,7 +22,7 @@ iniciativas <- read_excel(TF) %>% as_tibble()
 ```
 
 <p align="justify">
-La información presente en esta plataforma proviene directamente desde la **Plataforma digital de participación popular**, en el siguiente enlace: <https://plataforma.chileconvencion.cl>. Especificamente, se muestra a continuación lo relacionado con **Iniciativas Populare de Norma**, observando el apoyo, comisiones, temas y personas relacionadas con cada iniciativa.
+La información presente en esta plataforma proviene directamente desde la **Plataforma digital de participación popular**, en el siguiente enlace: <https://plataforma.chileconvencion.cl>. Especificamente, se muestra a continuación lo relacionado con **Iniciativas Populares de Norma**, observando el apoyo, comisiones, temas y personas relacionadas con cada iniciativa.
 </p>
 
 <p align="justify">
@@ -31,6 +31,8 @@ Habiendo terminado la fecha de presentación de iniciativas, se espera contribui
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fobservatorio-datos-fenust.netlify.app&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
 **Creación: 2021-01-20**
 
