@@ -22,7 +22,11 @@ iniciativas <- read_excel(TF) %>% as_tibble()
 ```
 
 <p align="justify">
-La información presente en esta plataforma proviene directamente desde la **Plataforma digital de participación popular**, en el siguiente enlace: <https://plataforma.chileconvencion.cl>. Especificamente, se muestra a continuación lo relacionado con **Iniciativas Populares de Norma**, observando el apoyo, comisiones, temas y personas relacionadas con cada iniciativa.
+El Observatorio de Datos Públicos forma parte del proyecto Observatorio Público UST que desarrolla la Facultad de Economía y Negocios de la Universidad Santo Tomas, desde el cual se busca contribuir a la calidad de las políticas públicas en nuestro país, dar visibilidad a asuntos de interés ciudadano y promover iniciativas para mejorar la eficacia de la acción del Estado y corregir externalidades causadas por la acción privada o de la sociedad.
+</p>
+
+<p align="justify">
+El Observatorio de Datos Públicos UST es una iniciativa para dar visibilidad a información de interés general de manera simple y amigable, aprovechando las herramientas de análisis y visualización de datos. En esta oportunidad el Observatorio de Datos UST pone a disposición de la ciudadanía información en línea que proviene directamente de la **Plataforma digital de participación popular** (enlace: https://plataforma.chileconvencion.cl), sobre las **Iniciativas Populares de Norma** que están presentando diferentes grupos de ciudadanas y ciudadanos para que sean consideradas por la Convención Constitucional para la elaboración de la nueva Constitución Política. Específicamente, las visualizaciones a las que se puede acceder permiten conocer la cantidad de apoyos tras cada iniciativas, las comisiones donde se han presentado, los temas que abordan y las personas relacionadas con ellas.
 </p>
 
 <p align="justify">

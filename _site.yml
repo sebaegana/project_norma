@@ -1,7 +1,7 @@
 name: CS631 Labs
 output_dir: '.'
 navbar:
-  title: Observatorio de datos UST
+  title: Observatorio de Datos Públicos UST
   left:
   right:
   - text: About
