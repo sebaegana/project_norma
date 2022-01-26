@@ -1,7 +1,7 @@
 name: CS631 Labs
 output_dir: '.'
 navbar:
-  title: Observatorio de datos públicos FEN UST
+  title: Observatorio de datos UST
   left:
   right:
   - text: About
