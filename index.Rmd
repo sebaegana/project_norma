@@ -57,7 +57,7 @@ populares_01 <- iniciativas %>%
          APOYOS = `Cantidad de Apoyos`) %>% 
   mutate(TITULO = stri_trans_general(toupper(TITULO), "Latin-ASCII")) %>% 
   arrange(desc(APOYOS)) %>% 
-  filter(APOYOS > 8000) 
+  filter(APOYOS > 10000) 
 
 populares_01$TITULO <- factor(populares_01$TITULO, 
                               levels = populares_01$TITULO[order(populares_01$APOYOS)]) 
@@ -81,7 +81,7 @@ fig <- plot_ly(populares_01, x = ~APOYOS, y = ~TITULO, type = 'bar', text = ~TIT
                              line = list(color = 'rgb(121,134,60)',
                                          width = 1.5)),
                orientation = 'h') %>% 
-  layout(title = 'Iniciativas con más de 8000 apoyos', font=list(size = 15)) %>%
+  layout(title = 'Iniciativas con más de 10000 apoyos', font=list(size = 15)) %>%
   layout(xaxis = list(title = 'Número de apoyos'), yaxis = list(title = '')) %>%
   layout(xaxis = list(titlefont = list(size = 10), tickfont = list(size = 10)), 
          yaxis = list(titlefont = list(size = 6), tickfont = list(size = 6))) %>% 
