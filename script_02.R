@@ -12,7 +12,8 @@ GET(url, write_disk(TF <- tempfile(fileext = ".xls")))
 
 iniciativas <- read_excel(TF) %>% as_tibble()
 
-# Iniciativas populares
+# Iniciativas más populares
+
 
 populares_01 <- iniciativas %>% 
   select(Nº, `Título`, `Cantidad de Apoyos`, URL) %>%
@@ -21,36 +22,23 @@ populares_01 <- iniciativas %>%
          APOYOS = `Cantidad de Apoyos`) %>% 
   mutate(TITULO = stri_trans_general(toupper(TITULO), "Latin-ASCII")) %>% 
   arrange(desc(APOYOS)) %>% 
-  filter(APOYOS > 8000) 
+  filter(APOYOS > 3000) %>% 
+  slice_head(n = 30) 
 
-populares_01$TITULO <- factor(populares_01$TITULO, 
-                              levels = populares_01$TITULO[order(populares_01$APOYOS)]) 
+populares_01$NUMERO <- factor(populares_01$NUMERO, 
+                              levels = populares_01$NUMERO[order(populares_01$APOYOS)]) 
 
-vline <- function(x = 0, color = 'rgb(40,70,58)') {
-  list(
-    type = "line",
-    y0 = 0,
-    y1 = 1,
-    yref = "paper",
-    x0 = x,
-    x1 = x,
-    line = list(color = color, dash="dot")
-  )
-}
+m <- list(l=10, r=0, b=50, t=50, pad=4)
 
-m <- list(l=500, r=0, b=10, t=35, pad=4)
-
-fig <- plot_ly(populares_01, x = ~APOYOS, y = ~TITULO, type = 'bar', text = ~TITULO,
-               marker = list(color = 'rgb(183,191,16)',
-                             line = list(color = 'rgb(121,134,60)',
-                                         width = 1.5)),
-               orientation = 'h') %>% 
-  layout(title = 'Iniciativas con más de 8000 apoyos', font=list(size = 15)) %>%
-  layout(xaxis = list(title = 'Número de apoyos'), yaxis = list(title = '')) %>%
+fig <- plot_ly(populares_01, x = ~NUMERO, y = ~APOYOS, type = 'bar', text = ~TITULO,
+               marker = list(color = 'rgb(158,202,225)',
+                             line = list(color = 'rgb(8,48,107)',
+                                         width = 1.5))) %>% 
+  layout(title = 'Iniciativas con mayor apoyo', font=list(size = 20)) %>%
+  layout(xaxis = list(title = 'Número de la iniciativa'), yaxis = list(title = 'Número de apoyos')) %>%
   layout(xaxis = list(titlefont = list(size = 10), tickfont = list(size = 10)), 
          yaxis = list(titlefont = list(size = 10), tickfont = list(size = 10))) %>% 
-  layout(margin=m) %>% 
-  layout(shapes = list(vline(15000)))
+  layout(autosize = F, width = 800, margin = m)
 
 fig
 
