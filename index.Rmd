@@ -85,15 +85,13 @@ fig <- plot_ly(populares_01, x = ~APOYOS, y = ~TITULO, type = 'bar', text = ~TIT
   layout(xaxis = list(title = 'Número de apoyos'), yaxis = list(title = '')) %>%
   layout(xaxis = list(titlefont = list(size = 10), tickfont = list(size = 10)), 
          yaxis = list(titlefont = list(size = 6), tickfont = list(size = 6))) %>% 
-  layout(autosize = F, width = 800, margin = m) %>% 
+  layout(width = 900, heights = 1000, margin = m) %>% 
   layout(shapes = list(vline(15000)))
 
 fig
 
 populares_02 <- populares_01 %>% 
   filter(APOYOS > 15000)
-
-
 
 ```
 
